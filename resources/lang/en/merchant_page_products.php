@@ -1,0 +1,82 @@
+<?php
+return [
+
+    'page_title' => 'Products',
+    'page_title_create' => 'Create product',
+    'page_title_edit' => 'Edit product',
+    'page_title_show' => 'Product details',
+    'page_title_attributes' => 'Product attributes',
+    'page_title_cost' => 'Product cost',
+    'content-header-title' => 'Available products',
+    'content-header-sub-title' => 'Below table show the list of the products who are are currently in the system',
+    'table_head_product_name' => 'Product name',
+    'table_head_product_description' => 'Description',
+    'table_head_product_expiry_date' => 'Expiry date',
+    'table_head_product_status' => 'Status',
+    'table_head_product_seller_name' => 'Seller name',
+    'navigation_link_index' => 'Products',
+    'navigation_link_create' => 'Create',
+    'navigation_link_view' => 'View',
+    'navigation_link_edit' => 'Edit',
+    'navigation_link_show' => 'Details',
+    'navigation_link_attributes' => 'Attributes',
+    'navigation_link_cost' => 'Costing',
+    'content_body_panel_heading' => 'Products',
+
+    'panel_nav_tab_heading_view'=>'Details',
+    'panel_nav_tab_heading_edit'=>'Edit',
+    'panel_nav_tab_heading_attributes'=>'Attributes',
+    'panel_nav_tab_heading_cost'=>'Cost',
+
+    'create_success'=>'New product has been created successful',
+    'create_fail'=>'Failed to created new product',
+
+    'update_success'=>'Product has been updated successful',
+    'update_fail'=>'Failed to update product info',
+
+    'retrieve_fail'=>'Failed to retrieve product, with a given id',
+    'price_cost_assign_fail'=>'Failed to assign, price or cost of the product',
+    'price_cost_assign_success'=>'Price assignment has been done successful',
+    'retrieve_success'=>'Product has been found',
+
+    'destroy_success'=>'Product has been deleted successful',
+    'destroy_fail'=>'Failed to delete product',
+
+    'field_placeholder_name'=>'Product name',
+    'field_placeholder_is_active'=>'Is activated',
+    'field_placeholder_created_by'=>'Created by',
+
+    'field_input_select_group_type'=>'Select product group',
+    'field_placeholder_description'=>'Description',
+    'field_input_select_type_default'=>'Select product type',
+    'field_input_select_categories'=>'Select product category',
+
+    'content_header_title_create' => 'Create new product',
+    'content_header_title_edit' => 'Edit product info',
+    'content_header_title_show' => 'Product information',
+    'content_header_title_attributes' => 'Attribute information',
+    'content_header_title_cost' => 'Cost attributes',
+    'content_header_title_attributes_details' => 'Attribute information',
+    'content_header_title_cost_details' => 'Here is where you will apply costing on your application',
+    'content_header_sub_title_create' => 'New product will be added',
+    'content_panel_title_create' => 'New product details',
+    'content_panel_title_edit' => 'Product details',
+
+    'modal_new_advert_button_close'=>'Close',
+
+    'panel_nav_tab_new_product' => 'Create advert',
+    'modal_new_advert_title' => 'Add new product',
+    'modal_new_advert_panel_good_title' => 'Good',
+    'modal_new_advert_panel_good_body' => 'Good: Implies tangible commodity such as phone, car, clothes etc',
+    'modal_new_advert_panel_service_title' => 'Service',
+    'modal_new_advert_panel_service_body' => 'Service: Implies the intangible of commodity offered to the client such as hotel etc.',
+
+    'field_label_category'=>'Categories',
+    'field_title_product_description'=>'Product description',
+    'field_title_product_details'=>'Product details',
+    'field_label_expiry_date'=>'Expiry date',
+    'field_placeholder_product_name'=>'Product name',
+    'field_label_product_images'=>'Product Images',
+    'field_label_product_images_max'=>'Max: 2MB',
+    'field_label_product_types'=>'Product Types',
+];
