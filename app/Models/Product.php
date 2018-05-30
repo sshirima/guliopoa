@@ -15,6 +15,8 @@ class Product extends Model
     const COLUMN_PRICE_DECISION_ID = 'price_decision_id';
     const COLUMN_EXPIRE_DATE = 'expiry_date';
     const COLUMN_IS_ACTIVE = 'is_active';
+    const COLUMN_OFFER_PRICE = 'offer_price';
+    const COLUMN_NORMAL_PRICE = 'normal_price';
 
     const TABLE = 'products';
     const DEFAULT_TYPES = array('GOODS','SERVICES');
@@ -30,6 +32,8 @@ class Product extends Model
     const IS_ACTIVE = self::TABLE . '.' . self::COLUMN_IS_ACTIVE;
     const CREATED_TIME = self::TABLE . '.' . self::CREATED_AT;
     const UPDATED_TIME = self::TABLE . '.' . self::UPDATED_AT;
+    const OFFER_PRICE = self::TABLE . '.' . self::COLUMN_OFFER_PRICE;
+    const NORMAL_PRICE = self::TABLE . '.' . self::COLUMN_NORMAL_PRICE;
 
     const REL_PRODUCT_IMAGES = 'productImages';
     const REL_IMAGES = 'images';
@@ -49,6 +53,8 @@ class Product extends Model
         self::COLUMN_EXPIRE_DATE,
         self::COLUMN_PRODUCT_TYPE,
         self::COLUMN_SELLER_ID,
+        self::COLUMN_OFFER_PRICE,
+        self::COLUMN_NORMAL_PRICE,
     ];
 
     /**
@@ -57,6 +63,11 @@ class Product extends Model
     public static $create_rules = [
         self::COLUMN_PRODUCT_NAME => 'required|max:255',
         self::COLUMN_PRODUCT_DESCRIPTION => 'required',
+        self::COLUMN_OFFER_PRICE => 'required|integer',
+        self::COLUMN_NORMAL_PRICE => 'required|integer',
+        self::REL_SUBCATEGORIES.'.*' => 'required|min:1',
+        self::REL_PRODUCT_IMAGES => 'required',
+        self::REL_PRODUCT_IMAGES.'.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
     /**
@@ -65,7 +76,9 @@ class Product extends Model
     public static $update_rules = [
         self::COLUMN_PRODUCT_NAME => 'required|max:255',
         self::COLUMN_PRODUCT_DESCRIPTION => 'required',
-        self::REL_SUBCATEGORIES.'*' => 'required|min:1',
+        self::COLUMN_OFFER_PRICE => 'required|integer',
+        self::COLUMN_NORMAL_PRICE => 'required|integer',
+        self::REL_SUBCATEGORIES.'.*' => 'required|min:1',
         self::REL_PRODUCT_IMAGES => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
@@ -113,5 +126,25 @@ class Product extends Model
      */
     public function priceDecision(){
         return $this->belongsTo(PriceDecision::class,self::COLUMN_PRICE_DECISION_ID,PriceDecision::COLUMN_ID);
+    }
+
+    /**
+     * Make sure small chunk of the whole post is displayed
+     * @param $str
+     * @param int $startPos
+     * @param int $maxLength
+     * @return bool|string
+     */
+    public static function getExcerpt($str, $startPos = 0, $maxLength = 50) {
+        if(strlen($str) > $maxLength) {
+            $excerpt   = substr($str, $startPos, $maxLength - 6);
+            $lastSpace = strrpos($excerpt, ' ');
+            $excerpt   = substr($excerpt, 0, $lastSpace);
+            $excerpt  .= ' ...';
+        } else {
+            $excerpt = $str;
+        }
+
+        return $excerpt;
     }
 }

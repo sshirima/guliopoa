@@ -163,6 +163,13 @@ Route::prefix('merchant')->group(function () {
 
     Route::get('products/{id}/show', 'Merchants\ProductController@show')->name('merchant.products.show');
     Route::get('products/{id}/attributes', 'Merchants\Products\AttributeController@show')->name('merchant.products.attributes');
+    Route::post('products/{id}/attributes', 'Merchants\Products\AttributeController@store')->name('merchant.products.attributes.store');
     Route::get('products/{id}/cost', 'Merchants\Products\CostController@show')->name('merchant.products.costs');
     Route::post('products/{id}/cost', 'Merchants\Products\CostController@store')->name('merchant.products.costs.store');
+
+    //Update product controller
+    Route::put('products/{id}/update/title', 'Merchants\Products\UpdateProductController@updateTitle')->name('merchant.products.update_title');
+    Route::put('products/{id}/update/description', 'Merchants\Products\UpdateProductController@updateDescription')->name('merchant.products.update_title');
+    Route::delete('products/{id}/delete/image', 'Merchants\Products\UpdateProductController@deleteImage')->name('merchant.products.update_title');
+    Route::put('products/{id}/update/images', 'Merchants\Products\UpdateProductController@updateImages')->name('merchant.products.update_images');
 });

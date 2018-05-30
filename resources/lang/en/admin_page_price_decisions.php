@@ -29,6 +29,7 @@ return [
 
     'field_placeholder_name'=>'Price decision name',
     'field_input_select'=>'Select decision factor',
+    'field_input_select_attribute'=>'Select attribute',
     'field_placeholder_code'=>'Code',
     'field_placeholder_description'=>'Description',
 

@@ -84,5 +84,4 @@ class PriceDecisionRepository extends BaseRepository
         }
         return $types;
     }
-
 }

@@ -146,6 +146,31 @@ class ProductAttributesRepository extends BaseRepository
      */
     public static function getAttributeByCode($code, $columns=[ProductAttribute::COLUMN_ID,ProductAttribute::COLUMN_ATTRIBUTE_CODE]){
         return ProductAttribute::select($columns)->where([ProductAttribute::COLUMN_ATTRIBUTE_CODE=>$code])->first();
+    }
 
+    /**
+     * @return array
+     */
+    public static function getAttributeArray(){
+        $priceDecisions = ProductAttribute::all();
+        $types = array(__('admin_page_price_decisions.field_input_select_attribute'));
+        foreach ($priceDecisions as $key=>$value){
+            $types[$value[ProductAttribute::COLUMN_ID]] =  $value[ProductAttribute::COLUMN_ATTRIBUTE_NAME];
+        }
+        return $types;
+    }
+
+    /**
+     * @param Request $request
+     * @param $productId
+     * @return bool
+     */
+    public function updateAttributes(Request $request, $productId){
+        $attributes  = $request['attributes'];
+
+        foreach ($attributes['ids'] as $key=>$value){
+            self::updateProductValue($productId,$value,$attributes['values'][$key]);
+        }
+        return true;
     }
 }

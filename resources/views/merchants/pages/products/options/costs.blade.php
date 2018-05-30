@@ -7,7 +7,6 @@
 @section('custom-import-up')
     <!-- Select 2 from CDN -->
     <link rel="stylesheet" href="{{asset('bower_components/select2/dist/css/select2.min.css')}}">
-
 @endsection
 
 @section('content-head')

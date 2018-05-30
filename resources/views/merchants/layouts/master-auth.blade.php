@@ -5,6 +5,5 @@
 @endsection
 
 @section('content')
-    <!-- Main content -->
     @yield('content-body')
 @endsection

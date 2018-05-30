@@ -9,6 +9,7 @@
 namespace App\Repositories\Merchants;
 
 use App\Http\Requests\Merchants\Products\CreateProductRequest;
+use App\Models\Merchant;
 use App\Models\Product;
 use App\Models\ProductAttribute;
 use App\Models\ProductAttributeValue;
@@ -70,9 +71,15 @@ class ProductRepository extends BaseRepository
 
         $product = $this->create($request->all());
 
-        $this->storeRelated($request, $product);
+        $this->storeProductImages($request, $product);
 
         return $product;
+    }
+
+    public function deleteProductImage($imageName){
+        $imageManager = new ImageManager();
+
+        return $imageManager->deleteImage($imageName);
     }
 
     /**
@@ -107,21 +114,22 @@ class ProductRepository extends BaseRepository
     }
 
     /**
-     * @param CreateProductRequest $request
+     * @param Request $request
      * @param $product
+     * @return bool
      */
-    private function storeRelated(CreateProductRequest $request, $product): void
+    public function storeProductImages(Request $request, $product)
     {
         $request[ProductImage::COLUMN_PRODUCT_ID] = $product[Product::COLUMN_ID];
 
-        $this->saveProductsImages($request);
+        return $this->saveProductsImages($request);
     }
 
     /**
-     * @param CreateProductRequest $request
-     * @return CreateProductRequest|bool
+     * @param Request $request
+     * @return bool|Request
      */
-    private function saveProductsImages(CreateProductRequest $request)
+    private function saveProductsImages(Request $request)
     {
         if (!$request->hasFile(Product::REL_PRODUCT_IMAGES)) {
 
@@ -131,7 +139,7 @@ class ProductRepository extends BaseRepository
 
             $request['images'] = $imageManager->handleUploadedImages($request,Product::REL_PRODUCT_IMAGES);
         }
-        return $request;
+        return true;
     }
 
     /**
@@ -182,5 +190,9 @@ class ProductRepository extends BaseRepository
     public function getProductById($id)
     {
         return $this->with(['images','subcategories','seller','attributes','priceDecision'])->findWithoutFail($id);
+    }
+
+    public function getProductsByMerchants(Request $request){
+        return Product::with(['images','seller'])->where([Product::COLUMN_SELLER_ID=>auth()->user()[Merchant::COLUMN_SELLER_ID]])->get();
     }
 }

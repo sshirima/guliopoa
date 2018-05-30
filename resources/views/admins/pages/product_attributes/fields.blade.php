@@ -15,7 +15,7 @@
     <span class="glyphicon glyphicon-align-justify form-control-feedback"></span>
 </div>
 <div class="form-group has-feedback">
-    {{Form::select(\App\Models\ProductAttribute::COLUMN_TYPE,$attributeTypes,array_search($productAttribute[\App\Models\ProductAttribute::COLUMN_TYPE],\App\Models\ProductAttribute::DEFAULT_TYPES)+1,['class'=>'form-control select2 select2-hidden-accessible'])}}
+    {{Form::select(\App\Models\ProductAttribute::COLUMN_TYPE,$attributeTypes,isset($productAttribute)?array_search($productAttribute[\App\Models\ProductAttribute::COLUMN_TYPE],\App\Models\ProductAttribute::DEFAULT_TYPES)+1:null,['class'=>'form-control select2 select2-hidden-accessible'])}}
 </div>
 <div class="form-group has-feedback">
 
